@@ -30,9 +30,19 @@ class EditRequest extends FormRequest
             'phone'=>["nullable","numeric",Rule::unique('users','phone')->ignore(auth()->user())],
             'gender' =>'required |string|max:1',
             'password'=>'required|confirmed|string|regex:/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&]).{8,32}$/',
-            'image'=>'nullable|image|mimes:jpeg,jpg,png,gif'
+            'image'=>'nullable|image|mimes:jpeg,jpg,png,gif',
+
+
+
         ];
     }
+
+    // 'street'=>'required|max:255|string|alpha',
+    //         'building'=>'required|max:255|string|alpha_num',
+    //         'floor'=>'nullable|max:255|string|alpha_num',
+    //         'flat'=>'nullable||numeric',
+    // 'city_id'=>'required|numeric',
+    //         'region_id'=>'required|numeric',
 
     public function messages()
     {
@@ -42,7 +52,11 @@ class EditRequest extends FormRequest
             2-At least one lowercase character.<br>
             3-At least one uppercase character.<br>
             4-At least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\]<br>
-            5-At least 8 characters in length, but no more than 32.<br>'
+            5-At least 8 characters in length, but no more than 32.<br>',
+
+            'city_id.required'=>'The city field is required',
+            'region_id.required'=>'The region field is required'
+
         ];
     }
 }

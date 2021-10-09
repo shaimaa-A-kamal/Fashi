@@ -7,6 +7,7 @@ use App\Http\Requests\Users\EditRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\address\City;
+use App\Models\Address\Region;
 use Exception;
 use Illuminate\Http\Request;
 use App\Traits\UploadImage;
@@ -78,7 +79,10 @@ class UserController extends Controller
     {
         $user=User::findOrFail($id);
         if (auth()->id() == $id)
-              return view('users.edit',compact('user'));
+       {       $regions=Region::get();
+               $cities=City::get();
+               $addresses=$user->addresses;
+              return view('users.edit',compact('user','regions','cities','addresses'));}
         else
             abort(403);
     }
@@ -95,12 +99,13 @@ class UserController extends Controller
                $user=User::findOrFail($id);
                if (auth()->id() == $id)
                {
-                $data=$request->except(['_token','image','_method','password_confirmation']);
+                $data=$request->except(['_token','image','_method','password_confirmation','address']);
                 if ($request['image'])
                                  { $data['image']=   $this->uploadImage($request->file('image'),'users/');}
                 $data['password']=Hash::make($data['password']);
                 User::where('id',$id)->update($data);
                 $user=User::find($id);
+                $this->updateAddress($user,($request->all())['address']['id']);
                 return redirect()->back()->with('success','<div class="text-center alert alert-success"> Profile has been updated successfullly</div>')->with('user',$user);
                }
          else
@@ -108,7 +113,8 @@ class UserController extends Controller
 
          }
          catch(Exception $e){
-            abort(500);
+        //    abort(500);
+        dd($e);
         }
     }
 

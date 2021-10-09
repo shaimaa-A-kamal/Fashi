@@ -37,8 +37,8 @@
               <i class="fas fa-th-large"></i>
             </a>
           </li>
-          @guest
-          @else
+          
+          @auth
           <li class="nav-item">
                 <a  href="{{ route('logout') }}" class="nav-link"
                 onclick="event.preventDefault();
@@ -49,7 +49,7 @@
           @csrf
           </form>
           </li>
-          @endguest
+          @endauth
         </ul>
       </nav>
       <!-- /.navbar -->

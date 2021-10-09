@@ -17,10 +17,9 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->string('street');
             $table->string('building');
-            $table->string('floor');
-            $table->integer('flat');
+            $table->string('floor')->nullable();
+            $table->integer('flat')->nullable();
             $table->string('notes')->nullable();
-            $table->boolean('type')->comment('0->house,1=>company,2=>club,3=>cafe');
             $table->boolean('status')->default(1)->comment('0=>not active,1=>active');
             $table->foreignId('region_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');

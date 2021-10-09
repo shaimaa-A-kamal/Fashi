@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 
+
     <!-- Breadcrumb Section Begin -->
     <x-layouts.breadcrumb :message="'Profile'"/>
 
@@ -13,7 +14,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                         <h2>Edit Profile</h2>
-                        <form action="{{route('users.update',$user->id)}}" method='post' enctype='multipart/form-data' >
+                        <form action="{{route('users.update',$user->id)}}" method='post' enctype='multipart/form-data'>
                             @csrf
                             @method('PUT')
                             @include('includes.success')
@@ -75,7 +76,15 @@
                                          <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                 </div>
-                                <button type="submit" class="site-btn register-btn">Update</button>
+                                @foreach($addresses as $address)
+                                <h5 class='text-center mb-2 mt-2'>Address {{$loop->iteration}}</h2>
+                                <div class="border p-2">
+                                <x-users.edit :regions='$regions'  :floor='$address->floor' :flat='$address->flat' :building='$address->building' :street='$address->street'
+                                :addressRegionId='$address->region->id' :id='$address->id' />
+                                </div>
+                                @endforeach
+                              <x-users.addnewaddress :regions='$regions'/>
+                                 <button type="submit" class="site-btn register-btn mt-3">Update</button>
                             </form>
                     </div>
                 </div>
@@ -83,6 +92,7 @@
         </div>
     </div>
     <!-- Profile Form Section End -->
-
-
+@endsection
+@section('js')
+<script src={{url('assets/js/edit.js')}}></script>
 @endsection

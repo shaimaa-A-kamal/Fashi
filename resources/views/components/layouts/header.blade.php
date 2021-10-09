@@ -24,17 +24,21 @@
                     <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login</a>
 
             @else
-            <a   href="{{route('users.show',  Auth::user()->id )}}" role="button" class="register-panel">
-                                {{ Auth::user()->name }}
-                    </a>
-                    <a  href="{{ route('logout') }}" class="login-panel"
-                           onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                           Logout
-                     </a>
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                     @csrf
-                     </form>
+            <a  href="{{ route('logout') }}" class="register-panel"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+             @csrf
+            </form>
+            @if (auth()->user()->user_type == 2)
+            <a href="{{route('admin')}}" class="login-panel"> AdminPanel</a>
+            @else
+            <a   href="{{route('users.show',  Auth::user()->id )}}" role="button" class="login-panel">
+                {{ ucfirst(Auth::user()->name) }}
+            </a>
+            @endif
              @endguest
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
@@ -161,6 +165,7 @@
                     </li>
                     <li><a href="{{route('blog')}}">Blog</a></li>
                     <li><a href="{{route('contact')}}">Contact</a></li>
+
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
                             <li><a href="{{route('blogDetails')}}">Blog Details</a></li>

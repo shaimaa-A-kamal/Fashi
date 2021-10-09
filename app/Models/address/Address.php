@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    public function getFloorAttribute($value){
+        return ucfirst($value);
+    }
+
+    public function getBuildingAttribute($value){
+        return ucfirst($value);
+    }
+
+    public function getStreetAttribute($value){
+        return ucfirst($value);
+    }
 
     public function user(){
         return $this->belongsTo(User::Class);
@@ -23,7 +34,6 @@ class Address extends Model
         'floor',
         'flat',
         'status',
-        'type',
         'notes',
         'region_id',
         'user_id',
