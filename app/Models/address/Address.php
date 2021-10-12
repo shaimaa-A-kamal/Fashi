@@ -34,6 +34,7 @@ class Address extends Model
         'floor',
         'flat',
         'status',
+        'defaultAddress',
         'notes',
         'region_id',
         'user_id',

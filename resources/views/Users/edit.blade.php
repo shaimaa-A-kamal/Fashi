@@ -3,7 +3,7 @@
 
 
     <!-- Breadcrumb Section Begin -->
-    <x-layouts.breadcrumb :message="'Profile'"/>
+    <x-layouts.breadcrumb :message="'EditProfile'"/>
 
     <!-- Breadcrumb Form Section Begin -->
 
@@ -17,7 +17,6 @@
                         <form action="{{route('users.update',$user->id)}}" method='post' enctype='multipart/form-data'>
                             @csrf
                             @method('PUT')
-                            @include('includes.success')
                                <div class='text-center mb-3'>
                                     <img src='{{url("images/users/".$user->image)}}' alt='profile pictue'   width="40%;"/>
                                     <div class='mt-2'>
@@ -52,20 +51,6 @@
                                        @enderror
                                 </div>
                                 <div class="group-input">
-                                    <label for="pass">Password *</label>
-                                    <input type="password" id="pass" name='password'>
-                                    @error('password')
-                                    <small class="text-danger">{!! $message !!}</small>
-                                    @enderror
-                                </div>
-                                <div class="group-input">
-                                    <label for="con-pass">Confirm Password *</label>
-                                    <input type="password" id="con-pass" name='password_confirmation'>
-                                    @error('confirm-password')
-                                    <small class="text-danger">{!! $message !!}</small>
-                                    @enderror
-                                </div>
-                                <div class="group-input">
                                         <label for="gender">Choose Gender *</label>
                                         <select class="form-select sel" id='gender' name='gender' aria-label="select gender">
                                                 <option></option>
@@ -76,14 +61,6 @@
                                          <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                 </div>
-                                @foreach($addresses as $address)
-                                <h5 class='text-center mb-2 mt-2'>Address {{$loop->iteration}}</h2>
-                                <div class="border p-2">
-                                <x-users.edit :regions='$regions'  :floor='$address->floor' :flat='$address->flat' :building='$address->building' :street='$address->street'
-                                :addressRegionId='$address->region->id' :id='$address->id' />
-                                </div>
-                                @endforeach
-                              <x-users.addnewaddress :regions='$regions'/>
                                  <button type="submit" class="site-btn register-btn mt-3">Update</button>
                             </form>
                     </div>
@@ -92,7 +69,4 @@
         </div>
     </div>
     <!-- Profile Form Section End -->
-@endsection
-@section('js')
-<script src={{url('assets/js/edit.js')}}></script>
 @endsection

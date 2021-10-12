@@ -8,12 +8,13 @@ class edit extends Component
 {
 
     public $regions;
+    public $cities;
     public $flat;
     public $floor;
     public $building;
     public $street;
     public $addressRegionId;
-    public $id;
+    public $addressCityId;
 
     /**
      * Create a new component instance.
@@ -21,16 +22,16 @@ class edit extends Component
      * @return void
      */
 
-    public function __construct($id="new address",$regions,$flat="",$floor="",$building="",$street="",$addressRegionId="")
-    {   $this->id=$id;
+    public function __construct($regions,$flat="",$floor="",$building="",$street="",$addressRegionId="",$addressCityId="",$cities)
+    {
         $this->regions=$regions;
+        $this->cities=$cities;
         $this->flat=$flat;
         $this->floor=$floor;
         $this->building=$building;
         $this->street=$street;
         $this->addressRegionId=$addressRegionId;
-
-
+        $this->addressCityId=$addressCityId;
     }
 
     /**

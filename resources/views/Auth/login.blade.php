@@ -9,6 +9,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form">
                         <h2>Login</h2>
+                     @include('includes.success')
                     <form action="{{route('AttemptLogin')}}" method='post'>
                         @csrf
                             <div class="group-input">

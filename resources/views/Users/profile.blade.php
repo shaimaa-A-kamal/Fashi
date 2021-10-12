@@ -7,54 +7,58 @@
     <!-- Breadcrumb Form Section Begin -->
 
     <!-- profile Section Begin -->
-    <div class="register-login-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="register-form">
-                        <h2>Profile</h2>
-                    <form>
-                           <div class='text-center mb-3'>
-                               <img src='{{url("images/users/".$user->image)}}' alt='profile pictue'  class='rounded' width="40%;"/>
-                               </div>
-                            <div class="group-input text-center">
-                                        <label for="username">Username</label>
-                                        <input type="text" id="username" name='name' value='{{$user->name}}'>
-                            </div>
+    <div class="card text-center mr-5 ml-5 mb-5 pb-5">
+        <div class="card-header">
+              Profile
+        </div>
+        @include('includes.success')
+        <div class="card-body">
+            <div class='row'>
+                <div class='col-md-4 col offset-md-2'>
+                        <div class="card text-left">
+                                <div class="card-header">
+                                <h5 style="float:left;">Account Details</h5>
+                                <a href="{{route('users.edit',auth()->id())}}" style="float:right; color:#E7AB3C;">Edit</a>
+                                </div>
+                                <div class="card-body">
+                                  <h6 class="card-title ">{{ucfirst(auth()->user()->name)}}</h6>
+                                  <p class="card-text mb-5">{{auth()->user()->email}}</p>
+                                <a href="{{route('changePassword',auth()->id())}}" style="color:#E7AB3C;font-size:1.2rem;">Change Password</a>
+                                </div>
+                              </div>
+                </div>
+                <div class='col-md-4'>
+                        <div class="card text-left">
+                                <div class="card-header">
+                                        <h5 style="float:left;">Address Book</h5>
+                                @if($address)
+                                <a href="{{route('address.edit',$address->id)}}" style="float:right;
+                                color:#E7AB3C;">Edit</a>
+                                @endif
+                                </div>
+                                <div class="card-body">
+                                  <h6 class="card-title">Your default shipping address:</h6>
+                                  <p class="card-text">Name: {{auth()->user()->name}}
+                                    <br>
+                                    Phone: {{auth()->user()->phone ?auth()->user()->phone :'' }}
+                                   @if($address)
+                                    <br>
+                                    City: {{$address->region->city->name}}
+                                    <br>
+                                    Region: {{$address->region->name}}
+                                    @else
+                                    <br><br>
+                                    <a href="{{route('address.index')}}"  class='p-2' style="color:white;
+                                    background-color:#E7AB3C;">Choose Address as Default</a>
+                                    @endif
 
-                            <div class="group-input text-center">
-                                <label for="email">Email address</label>
-                                <input type="email" id="email" name='email' value='{{$user->email}}'>
-                            </div>
-                            <div class="group-input text-center">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" id="phone" name='phone' value='{{$user->phone}}'>
-                            </div>
-                            <div class="group-input text-center">
-                                    <label for="gender">Gender</label>
-                                    <input type="text" id="gender" name='gender' value='{{$user->gender}}'>
-                            </div>
-                            @forelse($user->address as $address)
-                                <div class="group-input text-center">
-                                    <label for="{{'Address'.$loop->iteration}}">{{'Address'.$loop->iteration}}</label>
-                                    <input type="text" id="{{'Address'.$loop->iteration}}" name='{{'Address'.$loop->iteration}}' value='{{$address}}'>
+                                  </p>
                                 </div>
-                            @empty
-                            <div class="group-input text-center">
-                                    <label for="address">Address</label>
-                                    <input type="text" id="address" name='address' value=''>
-                                </div>
-                            @endforelse
-                            <div class='text-center'>
-                            <a  class="site-btn register-btn" href="{{route('users.edit',$user->id)}}">Edit</a>
-                            </div>
-                        </form>
-                    </div>
+                              </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Profile Form Section End -->
-
-
 @endsection

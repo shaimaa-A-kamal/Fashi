@@ -19,6 +19,7 @@ class CreateAddressesTable extends Migration
             $table->string('building');
             $table->string('floor')->nullable();
             $table->integer('flat')->nullable();
+            $table->boolean('defaultAddress')->nullable()->comment('1 means this is the default Address');
             $table->string('notes')->nullable();
             $table->boolean('status')->default(1)->comment('0=>not active,1=>active');
             $table->foreignId('region_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
