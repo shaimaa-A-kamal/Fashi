@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\adminVerificationEmail;
 use App\Models\address\address;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,6 +37,12 @@ class Admin extends Authenticatable implements MustVerifyEmail,CanResetPassword
      public function addresses(){
         return $this->hasMany(Address::class);
      }
+
+     public function sendEmailVerificationNotification()
+     {
+        $this->notify(new adminVerificationEmail);
+     }
+
 
 
     protected $fillable = [

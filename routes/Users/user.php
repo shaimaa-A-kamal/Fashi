@@ -6,7 +6,7 @@ use App\Http\Controllers\Users\changePasswordController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::resource('users',UserController::Class);
+Route::resource('users',UserController::Class)->middleware(['verified']);
 Route::group(['prefix' => 'users'],function(){
     Route::get('/changePassword/{user_id}',[changePasswordController::class,'changePassword'])->name('changePassword');
     Route::put('/updatePassword/{user_id}',[changePasswordController::class,'updatePassword'])->name('updatePassword');

@@ -21,10 +21,11 @@ class loginController extends Controller
         $remember_me=$request['remember'] ? true :false;
         if (Auth::attempt($credentials, $remember_me)) {
             $request->session()->regenerate();
-            if (auth()->user()->user_type == 2)
-                 return redirect()->intended('/admin');
-            else
-                return redirect()->intended('/');
+            return redirect()->intended('/');
+        }
+        elseif (Auth::guard('admin')->attempt($credentials, $remember_me)){
+            $request->session()->regenerate();
+             return redirect()->intended('/admin');
         }
 
         return back()->withErrors([

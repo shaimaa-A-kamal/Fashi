@@ -34,7 +34,7 @@ Route::get('/blog/{blog_id?}',[blogController::class,'blog'] )->name('blogDetail
 Route::get('/shop',[productController::class,'products'])->name('shop');
 Route::get('/shop/{product_id?}',[productController::class,'product'] )->name('product');
 
-route::group(['middleware'=>'verified'],function(){
+route::group(['middleware'=>['verified','auth']],function(){
 Route::get('/shopping-cart',[cartController::class,'cart'])->name('cart');
 
 Route::get('/check-out',[checkOutController::class,'checkout'])->name('checkOut');

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -21,9 +23,9 @@ class VerificationController extends Controller
     |
     */
 
-  public function __construct(){
-        $this->middleware('auth')->except('sendVerifyEmail');
-  }
+//   public function __construct(){
+//         $this->middleware('auth')->except('sendVerifyEmail');
+//   }
   public function sendVerifyEmail(){
     return view('auth.verify-email');
   }
@@ -33,12 +35,34 @@ class VerificationController extends Controller
     $user=auth()->user();
     $user->status=1;
     $user->save();
-    return redirect('/');
+    if(Auth::getDefaultDriver() == 'web')
+        return redirect('/');
+    elseif(Auth::getDefaultDriver() == 'admin')
+        return redirect('/admin');
+    else
+    return redirect()->route('login');
   }
 
   public function resend(Request $request){
+   try{
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('message', 'Verification link sent!');
+   }
+   catch(Exception $e){
+       dd($e);
+   }
+
   }
+//   public function adminresend(Request $request){
+//     try{
+//      $request->user()->sendEmailVerificationNotification();
+
+//      return back()->with('message', 'Verification link sent!');
+//     }
+//     catch(Exception $e){
+//         dd($e);
+//     }
+
+//    }
 }
