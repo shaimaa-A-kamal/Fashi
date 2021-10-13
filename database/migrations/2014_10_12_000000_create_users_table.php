@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone',12)->unique()->nullable();
             $table->string('gender',1)->comment('f=>female,m=>male');
-            $table->tinyInteger('user_type')->default(0)->comment('0=>client,1=>employee,2=>admin');
+            // $table->tinyInteger('user_type')->default(0)->comment('0=>client,1=>employee,2=>admin');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('status')->default(0)->comment('0=>Not active,1=>active');

@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 <body>
 <div id="preloder">
     <div class="loader"></div>
@@ -19,11 +22,12 @@
             </div>
             <div class="ht-right">
                             <!-- Authentication Links -->
-            @guest
+            @if (!auth('admin')->user() and !auth()->user())
+            {{-- @guest --}}
                     <a href="{{route('register')}}" class="register-panel"><i class="fa fa-user"></i> Register</a>
                     <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login</a>
-
             @else
+            {{-- @else --}}
             <a  href="{{ route('logout') }}" class="register-panel"
             onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
@@ -32,14 +36,15 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
              @csrf
             </form>
-            @if (auth()->user()->user_type == 2)
-            <a href="{{route('admin')}}" class="login-panel"> AdminPanel</a>
-            @else
-            <a   href="{{route('users.show',  Auth::user()->id )}}" role="button" class="login-panel">
-                {{ ucfirst(Auth::user()->name) }}
-            </a>
             @endif
-             @endguest
+            @if (auth('admin')->user())
+            <a href="{{route('admin')}}" class="login-panel"> AdminPanel</a>
+            @endif
+            @if (auth()->user())
+            <a   href="{{route('users.show',  Auth::user()->id )}}" role="button" class="login-panel">
+                {{ ucfirst(Auth::user()->name) }}</a>
+            @endif
+             {{-- @endguest --}}
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yt' data-image="{{url('assets/img/flag-1.jpg')}}" data-imagecss="flag yt"

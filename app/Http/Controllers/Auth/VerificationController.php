@@ -54,15 +54,5 @@ class VerificationController extends Controller
    }
 
   }
-//   public function adminresend(Request $request){
-//     try{
-//      $request->user()->sendEmailVerificationNotification();
 
-//      return back()->with('message', 'Verification link sent!');
-//     }
-//     catch(Exception $e){
-//         dd($e);
-//     }
-
-//    }
 }
