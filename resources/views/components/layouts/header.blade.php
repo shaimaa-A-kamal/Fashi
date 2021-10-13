@@ -23,11 +23,9 @@ use Illuminate\Support\Facades\Auth;
             <div class="ht-right">
                             <!-- Authentication Links -->
             @if (!auth('admin')->user() and !auth()->user())
-            {{-- @guest --}}
                     <a href="{{route('register')}}" class="register-panel"><i class="fa fa-user"></i> Register</a>
                     <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login</a>
             @else
-            {{-- @else --}}
             <a  href="{{ route('logout') }}" class="register-panel"
             onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
@@ -44,7 +42,6 @@ use Illuminate\Support\Facades\Auth;
             <a   href="{{route('users.show',  Auth::user()->id )}}" role="button" class="login-panel">
                 {{ ucfirst(Auth::user()->name) }}</a>
             @endif
-             {{-- @endguest --}}
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yt' data-image="{{url('assets/img/flag-1.jpg')}}" data-imagecss="flag yt"

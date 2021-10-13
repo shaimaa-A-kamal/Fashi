@@ -8,13 +8,14 @@
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-12 col-6">
                 @yield('content')
             </div>
         </div>
     </div>
 </section>
 </div>
+@yield('script')
 <x-admin.layouts.footer/>
 
 

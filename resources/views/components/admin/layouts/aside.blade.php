@@ -38,19 +38,59 @@
                 <a href="#" class="nav-link" style='background-color:#E7AB3C;'>
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
-                    Regions
-                    <i class="right fas fa-angle-left"></i>
+                  Cities                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./index.html" class="nav-link active">
+                    <a href="{{route('cities.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Add Region</p>
+                      <p>All cities</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                        <a href="{{route('cities.create')}}" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Create City</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                            <a href="{{route('cities.edit',1)}}" class="nav-link active">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Edit City</p>
+                            </a>
+                          </li>
                 </ul>
               </li>
+              <li class="nav-item menu-close">
+                    <a href="#" class="nav-link" style='background-color:#E7AB3C;'>
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                        Regions
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                    <a href="{{route('regions.index')}}" class="nav-link active">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>All Regions</p>
+                                    </a>
+                                  </li>
+                      <li class="nav-item">
+                        <a href="{{route('regions.create')}}" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Create Region</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                            <a href="{{route('regions.edit',1)}}" class="nav-link active">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Edit Region</p>
+                            </a>
+                          </li>
+                    </ul>
+                  </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
